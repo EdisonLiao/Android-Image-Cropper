@@ -118,7 +118,6 @@ internal class CropImageIntentChooser(
 
     val flags = 0
     val listCam = when {
-      SDK_INT >= 33 -> packageManager.queryIntentActivities(captureIntent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
       else -> @Suppress("DEPRECATION") packageManager.queryIntentActivities(captureIntent, flags)
     }
 
@@ -159,7 +158,6 @@ internal class CropImageIntentChooser(
 
     val flags = 0
     val listGallery = when {
-      SDK_INT >= 33 -> packageManager.queryIntentActivities(galleryIntent, PackageManager.ResolveInfoFlags.of(flags.toLong()))
       else -> @Suppress("DEPRECATION") packageManager.queryIntentActivities(galleryIntent, flags)
     }
     for (res in listGallery) {
@@ -204,7 +202,6 @@ internal class CropImageIntentChooser(
     try {
       val flags = PackageManager.GET_PERMISSIONS
       val packageInfo = when {
-        SDK_INT >= 33 -> context.packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(flags.toLong()))
         else -> @Suppress("DEPRECATION") context.packageManager.getPackageInfo(packageName, flags)
       }
       val declaredPermissions = packageInfo.requestedPermissions
